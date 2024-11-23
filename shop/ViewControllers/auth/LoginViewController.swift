@@ -11,7 +11,7 @@ final class LoginViewController: UIViewController {
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    private var service = UsersDataStore.shared
+    private var service = UsersDataSource.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,9 +72,18 @@ final class LoginViewController: UIViewController {
             return
         }
         
-        clearFields()
+        if let candidate = candidate {
+            let isValidPassword = service.comparePasswords(password, with: candidate)
+            
+            if !isValidPassword {
+                showAlert(title: "Ooops!", message: "Invalid password.")
+                return
+            }
+            
+            clearFields()
 
-        performSegue(withIdentifier: "home", sender: candidate)
+            performSegue(withIdentifier: "home", sender: candidate)
+        }
     }
         
     private func clearFields() {

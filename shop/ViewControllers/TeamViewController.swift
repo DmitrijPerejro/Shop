@@ -21,13 +21,21 @@ final class TeamViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        team.enumerated().forEach { index, member in
-            nameLabels[index].text = member.name
-            positionLabels[index].text = member.position
-            imageViews[index].image = UIImage(named: member.image)
-        }
+//        Мне кажется, так читабельней
+//        team.enumerated().forEach { index, member in
+//            nameLabels[index].text = member.name
+//            positionLabels[index].text = member.position
+//            imageViews[index].image = UIImage(named: member.image)
+//        }
         
-        imageViews.forEach { $0.layer.cornerRadius = 20 }
+        for ((name, position), (image, member)) in zip(zip(nameLabels, positionLabels), zip(imageViews, team)) {
+            name.text = member.name
+            position.text = member.position
+            image.image = UIImage(named: member.image)
+            
+            image.layer.cornerRadius = 20
+        }
+
     }
     
 }

@@ -11,7 +11,7 @@ final class RegistrationViewController: UIViewController {
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    private var service = UsersDataStore.shared
+    private var service = UsersDataSource.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

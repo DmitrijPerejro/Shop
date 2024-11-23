@@ -7,8 +7,8 @@
 
 import Foundation
 
-class UsersDataStore {
-    static let shared = UsersDataStore()
+class UsersDataSource {
+    static let shared = UsersDataSource()
 
     var users: [User] = [
         User(login: "root", password: "root", email: "root@root.root")
@@ -21,10 +21,6 @@ class UsersDataStore {
     }
     
     func findUserByLogin(with login: String) -> User? {
-        users.first(where: { $0.login == login })
-    }
-    
-    func getbyLogin(_ login: String) -> User? {
         users.first(where: { $0.login == login })
     }
     
