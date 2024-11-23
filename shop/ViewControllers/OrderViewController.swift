@@ -41,10 +41,19 @@ final class OrderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        countryPicker.delegate = self
+
         countryPicker.dataSource = self
+        countryPicker.delegate = self
+        nameTextField.delegate = self
+        phoneNumberTextField.delegate = self
+        cityTextField.delegate = self
         
         nameTextField.text = user.login
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     
     @IBAction func checkout() {
@@ -104,5 +113,13 @@ extension OrderViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         choosenCountry = countries[row]
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension OrderViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
